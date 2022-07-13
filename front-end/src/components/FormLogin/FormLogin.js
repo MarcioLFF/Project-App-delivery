@@ -6,12 +6,16 @@ const FormLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  function handleSubmit() {
+  }
+
   return (
     <div className="formLoginContainer">
       <div className="formEmail">
         <p>Login</p>
         <input
           type="email"
+          data-testid="common_login__input-email"
           id="email"
           value={ email }
           placeholder="email@trybeer.com.br"
@@ -22,6 +26,7 @@ const FormLogin = () => {
         <p>Login</p>
         <input
           type="password"
+          data-testid="common_login__input-password"
           id="password"
           value={ password }
           placeholder="********"
@@ -30,11 +35,14 @@ const FormLogin = () => {
       </div>
 
       <Button
+        onClick={ () => handleSubmit }
       >
         LOGIN
       </Button>
 
-      <Button variant='outline'
+      <Button
+        variant="outline"
+        onClick={ () => handleSubmit }
       >
         Ainda não tenho conta
       </Button>
