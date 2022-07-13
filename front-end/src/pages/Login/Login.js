@@ -7,14 +7,16 @@ import { ContextLogin } from '../../context/ContextLoginProvider';
 
 const Login = () => {
   const { error } = useContext(ContextLogin);
-  console.log(context);
   return (
     <div className="loginContainer">
       <LogoApp />
       <FormLogin />
       {error && (
-        <div>
-          {error }
+        <div
+          data-testid="common_login__element-invalid-email"
+          style={ { color: 'red', marginTop: '10px' } }
+        >
+          { error }
         </div>
       )}
     </div>

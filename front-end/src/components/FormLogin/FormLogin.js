@@ -1,12 +1,38 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './styles.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
+import { ContextLogin } from '../../context/ContextLoginProvider';
 
 const FormLogin = () => {
+  const navigate = useNavigate();
+  const { setError } = useContext(ContextLogin);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   function handleSubmit() {
+    const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    if (!regex.test(email) || !email) {
+      setError('Email na formatação errada');
+    }
+    if (password.trim() === '') {
+      setError('Senha não pode estar vazia');
+    }
+    if (regex.test(email) || email || password) {
+      axios
+        .post('localhost:3001/login', {
+          email, password,
+        }).then(({ data }) => {
+          localStorage.setItem(...data);
+        }).catch(({ message }) => {
+          setError(message);
+        });
+    }
+
+    const magicNumber = 10000;
+    setTimeout(() => setError(''), magicNumber);
   }
 
   return (
@@ -35,14 +61,14 @@ const FormLogin = () => {
       </div>
 
       <Button
-        onClick={ () => handleSubmit }
+        onClick={ () => handleSubmit() }
       >
         LOGIN
       </Button>
 
       <Button
         variant="outline"
-        onClick={ () => handleSubmit }
+        onClick={ () => navigate('/register') }
       >
         Ainda não tenho conta
       </Button>

@@ -4,12 +4,11 @@ import PropTypes from 'prop-types';
 export const ContextLogin = createContext({});
 
 const ContextLoginProvider = ({ children }) => {
-  const [error, setError] = useState(true);
+  const [error, setError] = useState('');
 
   const value = {
     error,
     setError,
-    algumacoisa: 'asdasd',
   };
 
   return (
