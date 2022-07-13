@@ -75,6 +75,7 @@ const FormLogin = () => {
 
       <Button
         onClick={ () => handleSubmit() }
+        variant="container"
       >
         LOGIN
       </Button>

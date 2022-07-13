@@ -11,7 +11,7 @@ function App() {
     if (pathname === '/') {
       navigate('/login');
     }
-  }, [navigate]);
+  }, [navigate, pathname]);
 
   return (
     <div className="App">
