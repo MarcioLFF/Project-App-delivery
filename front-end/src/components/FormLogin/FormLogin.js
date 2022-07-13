@@ -13,21 +13,34 @@ const FormLogin = () => {
   const [password, setPassword] = useState('');
 
   function handleSubmit() {
+    const passwordLength = 6;
     const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+
     if (!regex.test(email) || !email) {
       setError('Email na formatação errada');
     }
-    if (password.trim() === '') {
-      setError('Senha não pode estar vazia');
+
+    if (password.length < passwordLength) {
+      setError('Senha não pode ser menor que 6 caracteres');
     }
-    if (regex.test(email) || email || password) {
+
+    if ((!regex.test(email)) && (password.length > passwordLength)) {
       axios
-        .post('localhost:3001/login', {
+        .post(`${process.env.REACT_APP_HOSTNAME}:${process.env.REACT_APP_BACKEND_PORT}`, {
           email, password,
         }).then(({ data }) => {
           localStorage.setItem(...data);
         }).catch(({ message }) => {
-          setError(message);
+          switch (message) {
+          case 'Email invalid':
+            setError('Email ou senha incorretos');
+            break;
+          case 'Password invalid':
+            setError('Email ou senha incorretos');
+            break;
+          default:
+            setError('Erro ao conectar ao banco de dados');
+          }
         });
     }
 
@@ -49,7 +62,7 @@ const FormLogin = () => {
         />
       </div>
       <div className="formPassword">
-        <p>Login</p>
+        <p>Senha</p>
         <input
           type="password"
           data-testid="common_login__input-password"

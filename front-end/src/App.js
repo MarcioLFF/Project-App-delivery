@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import Login from './pages/Login/Login';
 
 function App() {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
   useEffect(() => {
-    navigate('/login');
+    if (pathname === '/') {
+      navigate('/login');
+    }
   }, [navigate]);
 
   return (
