@@ -4,6 +4,7 @@
     text-align: center;
     background-color: #036B52;
     color: #FFFFFF;
+    cursor: pointer;
 }
 
 .buttonOutline {
@@ -13,4 +14,5 @@
     color: #036B52;
     border: 1px solid #036B52;
     background-color: #FFFFFF;
+    cursor: pointer;
 }

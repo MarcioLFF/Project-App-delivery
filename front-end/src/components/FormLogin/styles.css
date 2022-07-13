@@ -1,10 +1,11 @@
 .formLoginContainer {
-    padding: 10px 10px 10px 10px;
+    padding: 20px;
     background-color: #B1C2BE;
     border: 1px solid #B1C2BE;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .formEmail > p, .formPassword > p {
@@ -14,7 +15,7 @@
 
 .formEmail > input, .formPassword > input {
     height: 50px;
-    width: 371px;
+    width: 250px;
     border-radius: 5px;
     border: 1px solid #001813;
     outline-color: #B1C2BE;

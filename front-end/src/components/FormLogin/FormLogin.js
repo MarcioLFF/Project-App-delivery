@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './styles.css';
-import Button from '../../Button/Button';
+import Button from '../Button/Button';
 
 const FormLogin = () => {
   const [email, setEmail] = useState('');
