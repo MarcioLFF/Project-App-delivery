@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import Header from './components/Header';
-import Login from './pages/Login';
+import Login from './pages/Login/Login';
 
 function App() {
   const navigate = useNavigate();
@@ -13,9 +12,8 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/login" element={ Login } />
+        <Route path="/login" element={ <Login /> } />
       </Routes>
-      <Header />
     </div>
   );
 }

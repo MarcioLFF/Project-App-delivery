@@ -1,0 +1,8 @@
+.logoContainer {
+    width: 425px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}

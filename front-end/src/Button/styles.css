@@ -1,0 +1,16 @@
+.buttonContainer {
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    background-color: #036B52;
+    color: #FFFFFF;
+}
+
+.buttonOutline {
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    color: #036B52;
+    border: 1px solid #036B52;
+    background-color: #FFFFFF;
+}
