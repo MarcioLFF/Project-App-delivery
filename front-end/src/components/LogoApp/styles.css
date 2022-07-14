@@ -1,0 +1,12 @@
+.logoContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 425px;
+}
+
+.logo {
+  height: 164px;
+  width: 166px;
+}
