@@ -12,14 +12,14 @@ module.exports = {
         type: Sequelize.STRING
       },
       price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.FLOAT
       },
-      urlImage: {
+      url_image: {
         type: Sequelize.STRING
       },
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface) {
     await queryInterface.dropTable('Products');
   }
 };
