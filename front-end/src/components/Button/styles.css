@@ -1,18 +1,18 @@
 .buttonContainer {
-    border-radius: 10px;
-    padding: 10px;
-    text-align: center;
-    background-color: #036B52;
-    color: #FFFFFF;
-    cursor: pointer;
+  background-color: #036b52;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  text-align: center;
 }
 
 .buttonOutline {
-    border-radius: 10px;
-    padding: 10px;
-    text-align: center;
-    color: #036B52;
-    border: 1px solid #036B52;
-    background-color: #FFFFFF;
-    cursor: pointer;
+  background-color: white;
+  border: 1px solid #036b52;
+  border-radius: 10px;
+  color: #036b52;
+  cursor: pointer;
+  padding: 10px;
+  text-align: center;
 }
