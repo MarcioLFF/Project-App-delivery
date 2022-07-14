@@ -2,26 +2,34 @@ import React from 'react';
 import './styles.css';
 import PropTypes from 'prop-types';
 
-const Button = ({ children, variant = 'container', onClick }) => (
-  <div
-    data-testid={
-      variant === 'container'
-        ? 'common_login__button-login'
-        : 'common_login__button-register'
-    }
+const Button = ({
+  children,
+  variant = 'container',
+  onClick,
+  dataTestid,
+  disabled = false,
+}) => (
+  <button
+    type="submit"
+    data-testid={ dataTestid }
     onClick={ onClick }
-    role="button"
     className={ variant === 'container' ? 'buttonContainer' : 'buttonOutline' }
-    aria-hidden="true"
+    disabled={ disabled }
   >
     {children}
-  </div>
+  </button>
 );
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
+  dataTestid: PropTypes.string.isRequired,
   variant: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
+};
+
+Button.defaultProps = {
+  disabled: false,
 };
 
 export default Button;

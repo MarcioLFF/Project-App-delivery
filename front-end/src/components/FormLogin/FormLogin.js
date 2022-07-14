@@ -1,41 +1,42 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './styles.css';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
 import { ContextLogin } from '../../context/ContextLoginProvider';
+import api from '../../services/api';
+
+const error400 = 400;
 
 const FormLogin = () => {
   const navigate = useNavigate();
   const { setError } = useContext(ContextLogin);
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [disabled, setDisabled] = useState(true);
 
-  function handleSubmit() {
-    const passwordLength = 6;
-    const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+  const passwordLength = 6;
+  const regex = /\S+@\S+.\S+[\w-]{2,4}$/;
 
-    if (!regex.test(email) || !email) {
-      setError('Email na formatação errada');
-    }
+  useEffect(() => {
+    if ((regex.test(email)) && (password.length >= passwordLength)) {
+      setDisabled(false);
+    } else setDisabled(true);
+  }, [email, password, regex]);
 
-    if (password.length < passwordLength) {
-      setError('Senha não pode ser menor que 6 caracteres');
-    }
-
-    if ((!regex.test(email)) && (password.length > passwordLength)) {
-      axios
-        .post(`${process.env.REACT_APP_HOSTNAME}:${process.env.REACT_APP_BACKEND_PORT}`, {
+  function handleSubmit(e) {
+    e.preventDefault();
+    if ((regex.test(email)) && (password.length >= passwordLength)) {
+      api
+        .post('/api/user/login', {
           email, password,
         }).then(({ data }) => {
-          localStorage.setItem(...data);
-        }).catch(({ message }) => {
-          switch (message) {
-          case 'Email invalid':
-            setError('Email ou senha incorretos');
-            break;
-          case 'Password invalid':
+          localStorage.setItem('user', JSON.stringify({ ...data }));
+          console.log(data);
+          navigate(`/${data.role}`);
+        }).catch(({ response: { status } }) => {
+          console.log(status);
+          switch (status) {
+          case error400:
             setError('Email ou senha incorretos');
             break;
           default:
@@ -74,14 +75,17 @@ const FormLogin = () => {
       </div>
 
       <Button
-        onClick={ () => handleSubmit() }
+        onClick={ (e) => handleSubmit(e) }
+        dataTestid="common_login__button-login"
         variant="container"
+        disabled={ disabled }
       >
         LOGIN
       </Button>
 
       <Button
         variant="outline"
+        dataTestid="common_login__button-register"
         onClick={ () => navigate('/register') }
       >
         Ainda não tenho conta

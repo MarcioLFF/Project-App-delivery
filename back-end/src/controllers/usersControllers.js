@@ -4,6 +4,7 @@ const loginControllers = async (req, res) => {
   const { email, password } = req.body;
   const user = await services.loginServices(email, password);
   if (user instanceof Error) {
+    console.log(user.message);
     return res.status(400).json({ message: user.message });
   }
 
