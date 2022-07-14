@@ -10,13 +10,13 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
     },
   
-    totalPrice: DataTypes.NUMBER,
-    deliveryAddress: DataTypes.STRING,
-    deliveryNumber: DataTypes.STRING,
-    saleDate: DataTypes.DATE,
+    total_price: DataTypes.NUMBER,
+    delivery_address: DataTypes.STRING,
+    delivery_number: DataTypes.STRING,
+    sale_date: DataTypes.DATE,
     status: DataTypes.STRING,
-    userId: DataTypes.NUMBER,
-    sellerId: DataTypes.NUMBER
+    user_id: DataTypes.NUMBER,
+    seller_id: DataTypes.NUMBER
   }, {
     modelName: 'sales',
     timestamps: false,
@@ -26,12 +26,12 @@ module.exports = (sequelize, DataTypes) => {
 
   Sale.associate = (models) => {
     Sale.belongsTo(models.User, {
-      foreignKey: 'userId',
+      foreignKey: 'user_id',
       as: 'userName'
     });
     
     Sale.belongsTo(models.User, {
-      foreignKey: 'sellerId',
+      foreignKey: 'seller_id',
       as: 'sellerName'
     });
     

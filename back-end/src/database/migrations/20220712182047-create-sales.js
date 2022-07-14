@@ -8,22 +8,22 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      totalPrice: {
+      total_price: {
         type: Sequelize.INTEGER
       },
-      deliveryAddress: {
+      delivery_address: {
         type: Sequelize.STRING
       },
-      deliveryNumber: {
+      delivery_number: {
         type: Sequelize.STRING
       },
-      saleDate: {
+      sale_date: {
         type: Sequelize.DATE
       },
       status: {
         type: Sequelize.STRING
       },
-      userId: {
+      user_id: {
         type: Sequelize.INTEGER,
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
@@ -32,7 +32,7 @@ module.exports = {
           key: 'id'
         }
       },
-      sellerId: {
+      seller_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'users',
@@ -41,7 +41,7 @@ module.exports = {
       }
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface) {
     await queryInterface.dropTable('sales');
   }
 };
