@@ -1,9 +1,7 @@
 const md5 = require('md5');
-const jwt = require('jsonwebtoken');
+const jwt = require('../utils/jwt.utils');
 
 const { user: User } = require('../database/models');
-
-const secretKey = 'secret_key';
 
 const loginServices = async (email, password) => {
   const user = await User.findOne({ where: { email } });
@@ -16,14 +14,14 @@ const loginServices = async (email, password) => {
   if (user.password !== cryptPassword) {
     return new Error('Email or Password wrong');
   }
-  const token = jwt.sign(JSON.stringify(user), secretKey);
+  const token = jwt.sign(user);
 
-  return { 
-    name: user.name, 
+  return {
+    name: user.name,
     email: user.email,
     role: user.role,
-    token, 
-    };
+    token,
+  };
 };
 
 const registerServices = async (name, email, password, role) => {
@@ -54,7 +52,7 @@ const getAll = async () => {
 };
 
 const getOne = async (token) => {
-  const { email } = jwt.verify(token, secretKey);
+  const { email } = jwt.verify(token);
   const user = await User.findOne({ where: { email } });
 
   if (!user) {
