@@ -13,7 +13,8 @@ const Button = ({
     type="submit"
     data-testid={ dataTestid }
     onClick={ onClick }
-    className={ variant === 'container' ? 'buttonContainer' : 'buttonOutline' }
+    className={ !disabled && variant === 'container'
+      ? 'buttonContainer' : 'buttonOutline' }
     disabled={ disabled }
   >
     {children}

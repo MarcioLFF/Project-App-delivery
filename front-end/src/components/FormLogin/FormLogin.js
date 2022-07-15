@@ -7,6 +7,12 @@ import api from '../../services/api';
 
 const error400 = 400;
 
+const route = {
+  customer: '/customer/products',
+  seller: '/seller/orders',
+  administrator: '/administrator',
+};
+
 const FormLogin = () => {
   const navigate = useNavigate();
   const { setError } = useContext(ContextLogin);
@@ -15,7 +21,7 @@ const FormLogin = () => {
   const [disabled, setDisabled] = useState(true);
 
   const passwordLength = 6;
-  const regex = /\S+@\S+.\S+[\w-]{2,4}$/;
+  const regex = /\S+@\S+\.\S+[\w-]{2,4}$/;
 
   useEffect(() => {
     if ((regex.test(email)) && (password.length >= passwordLength)) {
@@ -31,8 +37,7 @@ const FormLogin = () => {
           email, password,
         }).then(({ data }) => {
           localStorage.setItem('user', JSON.stringify({ ...data }));
-          console.log(data);
-          navigate(`/${data.role}`);
+          navigate(route[data.role]);
         }).catch(({ response: { status } }) => {
           console.log(status);
           switch (status) {
